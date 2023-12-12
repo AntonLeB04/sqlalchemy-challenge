@@ -35,7 +35,7 @@ app = Flask(__name__)
 @app.route("/")
 def welcome():
     return (
-        f"Welcome to the Hawaii Precipitation API!<br/>"
+        f"Welcome to the Surfs Up API!<br/>"
         f"Available Routes:<br/>"
         f"/api/v1.0/precipitation<br/>"
         f"/api/v1.0/stations<br/>"
@@ -100,11 +100,20 @@ def tobs():
         tobs_one_year.append(tobs_dict)
     return jsonify(tobs_one_year)
 
-#@app.route("/api/v1.0/<start>")
-#def start():
+@app.route("/api/v1.0/<start>")
+def start():
+    station_avg = session.query(
+                            func.min(measurement.tobs),
+                            func.max(measurement.tobs),
+                            func.avg(measurement.tobs)).\
+                            filter(measurement.station == 'USC00519281').all()
 
-#@app.route("/api/v1.0/<start>/<end>")
-#def end():
-
+@app.route("/api/v1.0/<start>/<end>")
+def end():
+    station_avg = session.query(
+                            func.min(measurement.tobs),
+                            func.max(measurement.tobs),
+                            func.avg(measurement.tobs)).\
+                            filter(measurement.station == 'USC00519281').all()
 if __name__ == "__main__":
     app.run(debug=True)

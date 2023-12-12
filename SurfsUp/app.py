@@ -87,7 +87,9 @@ def stations():
 
 @app.route("/api/v1.0/tobs")
 def tobs():
+    session = Session(engine)
 
+    
 @app.route("/api/v1.0/<start>")
 def start():
 

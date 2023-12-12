@@ -29,8 +29,6 @@ session = Session(engine)
 #################################################
 app = Flask(__name__)
 
-
-
 #################################################
 # Flask Routes
 #################################################
@@ -89,7 +87,7 @@ def stations():
 def tobs():
     session = Session(engine)
 
-    
+
 @app.route("/api/v1.0/<start>")
 def start():
 
